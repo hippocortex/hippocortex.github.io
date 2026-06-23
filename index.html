@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stéphane Barberye - Expert Architecture & JVM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fdfcf9;
+            color: #2d3436;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-link {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .fiche-content {
+            display: none;
+        }
+
+        .fiche-card.active .fiche-content {
+            display: block;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -9px;
+            top: 0;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #3b82f6;
+            border: 4px solid #fff;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 glass-card px-6 py-4 mb-8">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex flex-col">
+                <span class="text-xl font-bold text-slate-800">Stéphane BARBERYE</span>
+                <span class="text-xs uppercase tracking-widest text-blue-600 font-semibold">Architecte Solutions & Tech Lead</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+                <a href="#dashboard" class="nav-link">Dashboard</a>
+                <a href="#parcours" class="nav-link">Expérience</a>
+                <a href="#revisions" class="nav-link">Révisions</a>
+                <a href="#transition" class="nav-link">Transition</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-4 pb-20">
+
+        <!-- Header / Dashboard -->
+        <section id="dashboard" class="mb-16">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                
+                <div class="lg:col-span-1 glass-card rounded-2xl p-8 flex flex-col items-center">
+                    <div class="w-32 h-32 bg-slate-200 rounded-full mb-6 flex items-center justify-center text-4xl font-bold text-slate-500">SB</div>
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">26 Ans d'Expertise</h2>
+                    <p class="text-slate-500 text-center mb-6">"Apporter une vision architecturale innovante par l'apprentissage continu."</p>
+                    <div class="grid grid-cols-2 gap-4 w-full">
+                        <div class="bg-blue-50 p-4 rounded-xl text-center border border-blue-100">
+                            <span class="block text-2xl font-bold text-blue-700">6+</span>
+                            <span class="text-xs uppercase text-blue-600">Clients Majeurs</span>
+                        </div>
+                        <div class="bg-amber-50 p-4 rounded-xl text-center border border-amber-100">
+                            <span class="block text-2xl font-bold text-amber-700">100%</span>
+                            <span class="text-xs uppercase text-amber-600">JVM & Cloud</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-2 glass-card rounded-2xl p-8">
+                    <h3 class="text-xl font-bold text-slate-800 mb-6">Équilibre de Compétences (Profil T-Shaped)</h3>
+                    <p class="text-sm text-slate-500 mb-6 italic">Ce graphique illustre la polyvalence entre l'ingénierie back-end profonde, le leadership stratégique et l'ouverture aux stacks modernes (React/Cloud).</p>
+                    <div class="chart-container">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Parcours Stratégique -->
+        <section id="parcours" class="mb-20">
+            <div class="flex items-center space-x-4 mb-10">
+                <h2 class="text-3xl font-bold text-slate-800">Parcours Stratégique</h2>
+                <div class="h-px bg-slate-200 flex-grow"></div>
+            </div>
+
+            <div class="space-y-12 ml-4 border-l-2 border-slate-200 pl-8 relative">
+                
+                <!-- Publicis -->
+                <div class="relative timeline-item">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h4 class="text-xl font-bold text-slate-800">Publicis Sapient</h4>
+                            <span class="text-blue-600 font-semibold">Architecte Solutions & Tech Lead Senior</span>
+                        </div>
+                        <span class="text-sm font-medium bg-slate-100 px-3 py-1 rounded-full text-slate-600 mt-2 md:mt-0">2020 — Présent</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                        <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm">
+                            <span class="font-bold block mb-2 text-slate-700">Clients Phares</span>
+                            <ul class="space-y-1 text-slate-600">
+                                <li>• Paylib (Paiements)</li>
+                                <li>• Renault (Industrie)</li>
+                                <li>• Sonepar (Distribution)</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white p-4 rounded-lg border border-slate-100 shadow-sm md:col-span-2">
+                            <span class="font-bold block mb-2 text-slate-700">Réalisations Clés</span>
+                            <p class="text-slate-600 leading-relaxed">
+                                Modernisation d'écosystèmes via architectures **Kafka**, microservices **Kotlin/Java** et interfaces **React**. Pilotage de la CI/CD pour sécuriser les cycles de mise en production.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Accor -->
+                <div class="relative timeline-item">
+                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                        <div>
+                            <h4 class="text-xl font-bold text-slate-800">Accor Group</h4>
+                            <span class="text-blue-600 font-semibold">Architecte Solutions & Pilote Design Authority</span>
+                        </div>
+                        <span class="text-sm font-medium bg-slate-100 px-3 py-1 rounded-full text-slate-600 mt-2 md:mt-0">2013 — 2019</span>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg border border-slate-100 shadow-sm">
+                        <p class="text-sm text-slate-600 mb-4 leading-relaxed">
+                            Positionnement transverse sur la gouvernance technique mondiale. Passage d'une infrastructure legacy à un Cloud-Native (**AWS, Kubernetes**) avec automatisation **Terraform/Ansible**.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 bg-slate-50 text-slate-500 rounded text-xs border border-slate-100">Design Authority</span>
+                            <span class="px-2 py-1 bg-slate-50 text-slate-500 rounded text-xs border border-slate-100">AWS</span>
+                            <span class="px-2 py-1 bg-slate-50 text-slate-500 rounded text-xs border border-slate-100">Spring Batch</span>
+                            <span class="px-2 py-1 bg-slate-50 text-slate-500 rounded text-xs border border-slate-100">Kubernetes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historique -->
+                <div class="pt-4">
+                    <button id="toggleHistory" class="text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors">
+                        Voir les repères de carrière (2000 - 2013) 
+                    </button>
+                    <div id="extraHistory" class="hidden mt-6 overflow-x-auto">
+                        <table class="min-w-full text-sm text-left text-slate-500 border border-slate-200 rounded-lg overflow-hidden">
+                            <thead class="bg-slate-50 text-slate-700">
+                                <tr>
+                                    <th class="px-4 py-2">Période</th>
+                                    <th class="px-4 py-2">Société</th>
+                                    <th class="px-4 py-2">Rôle / Missions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100">
+                                <tr><td class="px-4 py-2">2010 - 2012</td><td class="px-4 py-2">Soft Computing</td><td class="px-4 py-2">Senior JEE (Missions Accor, Generali)</td></tr>
+                                <tr><td class="px-4 py-2">2006 - 2009</td><td class="px-4 py-2">Micropole</td><td class="px-4 py-2">Dev JEE (Missions Bouygues, Generali)</td></tr>
+                                <tr><td class="px-4 py-2">2000 - 2005</td><td class="px-4 py-2">Transfact, ACE, ...</td><td class="px-4 py-2">Fondations JEE & Web (Struts, JBoss)</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Centre de Révision -->
+        <section id="revisions" class="mb-20">
+            <div class="flex items-center space-x-4 mb-10">
+                <h2 class="text-3xl font-bold text-slate-800">Centre de Révision Technique</h2>
+                <div class="h-px bg-slate-200 flex-grow"></div>
+            </div>
+            
+            <p class="text-slate-600 mb-8 max-w-3xl">Cliquez sur une fiche pour réviser les concepts clés. Ces fiches sont optimisées pour les réponses type en entretien de Tech Lead.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="fichesGrid">
+                <!-- Les fiches sont injectées par JS -->
+            </div>
+        </section>
+
+        <!-- Transition & Formation -->
+        <section id="transition" class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            
+            <div class="glass-card rounded-2xl p-8">
+                <h3 class="text-xl font-bold text-slate-800 mb-6">Formation Cybersécurité (CNAM)</h3>
+                <div class="mb-6">
+                    <div class="flex justify-between text-sm mb-2">
+                        <span class="text-slate-600 font-medium">Titre RNCP Niveau 6</span>
+                        <span class="text-blue-600 font-bold">Projet 2026-2027</span>
+                    </div>
+                    <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
+                        <div class="bg-blue-500 h-full w-[10%]"></div>
+                    </div>
+                </div>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex items-start">
+                        <span class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center mr-3 text-[10px] mt-0.5">✔</span>
+                        <div>
+                            <span class="font-bold text-slate-700">Cadrage :</span>
+                            <span class="text-slate-600">Parcours orienté infrastructures applicatives et réseaux.</span>
+                        </div>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center mr-3 text-[10px] mt-0.5">●</span>
+                        <div>
+                            <span class="font-bold text-slate-700">Unités clés :</span>
+                            <span class="text-slate-600">Sécurité des réseaux (RSX112), Menaces (SEC102).</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="glass-card rounded-2xl p-8 bg-slate-800 text-white">
+                <h3 class="text-xl font-bold mb-6">Guide PSE & Reclassement</h3>
+                <div class="space-y-6 text-sm text-slate-300">
+                    <div class="border-l-4 border-amber-500 pl-4 py-1">
+                        <span class="font-bold text-white block mb-1">Rémunération du Congé</span>
+                        <p>65% de la rémunération brute moyenne (après période de préavis). Soumis à CSG/CRDS (6.7%) mais exonéré de cotisations sécu.</p>
+                    </div>
+                    <div class="border-l-4 border-blue-400 pl-4 py-1">
+                        <span class="font-bold text-white block mb-1">Activités Freelance</span>
+                        <p>Possible ! Pendant le préavis (loyauté requise) et après (considéré comme reclassement). Attention : versement de l'allocation suspendu les jours travaillés.</p>
+                    </div>
+                    <p class="text-xs italic text-slate-400">Toujours consulter l'accord de PSE spécifique pour les primes de création d'entreprise.</p>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="bg-white border-t border-slate-100 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center text-slate-400 text-sm">
+            <p>© 2026 Stéphane Barberye - Dossier de Compétences Interactif</p>
+            <div class="mt-4 md:mt-0 flex space-x-6">
+                <span>Expertise : JVM / Architecture / Cloud</span>
+                <span>Projet : Cybersécurité CNAM</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // -- Données des Fiches de Révision --
+        const fichesData = [
+            {
+                id: 1,
+                title: "JVM & Concurrence",
+                category: "Backend",
+                summary: "Virtual Threads vs Coroutines Kotlin, ZGC.",
+                content: `<b>Réponse Type :</b> "Avec Java 21, Loom permet des millions de threads légers sans saturer l'OS. ZGC est mature pour les pauses sub-millisecondes."<br><br><b>Point Clé :</b> Le <i>Thread Pinning</i> avec synchronized annule les bénéfices de Loom. Préférer ReentrantLock.`
+            },
+            {
+                id: 2,
+                title: "Kotlin vs Java",
+                category: "Backend",
+                summary: "Null Safety, Records, Sealed Classes.",
+                content: `<b>Réponse Type :</b> "Kotlin offre une sécurité native (Null Safety). Java rattrape le retard avec les Records et le Pattern Matching (Java 17/21)."<br><br><b>Choix Tech :</b> Kotlin pour la productivité et coroutines. Java pour l'usage natif de Loom ou équipes historiques.`
+            },
+            {
+                id: 3,
+                title: "Postgres vs Mongo",
+                category: "Data",
+                summary: "ACID vs Flexibilité document.",
+                content: `<b>Réponse Type :</b> "Postgres pour les relations complexes et ACID. Mongo pour la scalabilité horizontale et documents évolutifs."<br><br><b>Le Tips :</b> Postgres gère aujourd'hui parfaitement le JSONB, rendant Mongo moins indispensable pour du simple flexible.`
+            },
+            {
+                id: 4,
+                title: "Kafka & Streaming",
+                category: "Architecture",
+                summary: "Topics, Partitions, Offsets, Résilience.",
+                content: `<b>Réponse Type :</b> "Kafka est un commit log distribué. Les consumers gèrent l'offset, permettant de rejouer des événements."<br><br><b>Point Clé :</b> Ordre garanti seulement au sein d'une partition. Utiliser les DLT (Dead Letter Topics) pour la gestion d'erreurs.`
+            },
+            {
+                id: 5,
+                title: "Posture Tech Lead",
+                category: "Leadership",
+                summary: "Dette technique vs Business.",
+                content: `<b>Réponse Type :</b> "Être le pont entre PO et Technique. Ne jamais refuser frontalement, mais négocier (ex: 20% du sprint sur la dette)."<br><br><b>Pragmatisme :</b> Le 'Good Enough' est parfois nécessaire pour le Time-to-Market.`
+            },
+            {
+                id: 6,
+                title: "Spring Boot/Batch",
+                category: "Backend",
+                summary: "Beans, Proxy, Chunking processing.",
+                content: `<b>Spring Batch :</b> Pattern Chunk (Reader/Processor/Writer) pour les volumes massifs. <br><br><b>Annotation :</b> @Transactional utilise des proxys dynamiques. Attention aux appels internes.`
+            },
+            {
+                id: 7,
+                title: "React (Profil Back)",
+                category: "Fullstack",
+                summary: "Hooks, BFF, Intégration API.",
+                content: `<b>Posture :</b> "Intervenir en Front pour assurer la cohérence de l'API (BFF). Maîtrise des Hooks (useState, useEffect) et de la consommation REST."`
+            },
+            {
+                id: 8,
+                title: "Design Patterns",
+                category: "Architecture",
+                summary: "GoF : Création, Structure, Comportement.",
+                content: `<b>Top Patterns :</b> Strategy (remplace les if/else), Decorator, Proxy (base de Spring), Factory.<br><br><b>Note :</b> En Kotlin, le Singleton est natif via 'object'.`
+            }
+        ];
+
+        // -- Initialisation du Graphique --
+        const ctx = document.getElementById('skillsChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: ['Back-end (JVM)', 'Architecture Systems', 'Cloud / DevOps', 'Leadership / PO', 'Front-end (React)', 'Data / SQL / NoSQL'],
+                datasets: [{
+                    label: 'Expertise Stéphane B.',
+                    data: [95, 90, 85, 80, 65, 88],
+                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    borderColor: '#3b82f6',
+                    pointBackgroundColor: '#3b82f6',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                scales: {
+                    r: {
+                        angleLines: { color: '#e2e8f0' },
+                        grid: { color: '#e2e8f0' },
+                        pointLabels: {
+                            font: { size: 11, weight: '600' },
+                            color: '#64748b'
+                        },
+                        ticks: { display: false, stepSize: 20 },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                },
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        // -- Injection des fiches --
+        const grid = document.getElementById('fichesGrid');
+        fichesData.forEach(f => {
+            const card = document.createElement('div');
+            card.className = "fiche-card glass-card rounded-xl p-6 cursor-pointer hover:border-blue-300 transition-all";
+            card.onclick = () => card.classList.toggle('active');
+            card.innerHTML = `
+                <div class="flex justify-between items-start mb-3">
+                    <span class="text-[10px] font-bold uppercase tracking-tighter px-2 py-1 bg-slate-100 rounded text-slate-500">${f.category}</span>
+                    <span class="text-blue-500 text-lg">⊕</span>
+                </div>
+                <h4 class="font-bold text-slate-800 mb-2">${f.title}</h4>
+                <p class="text-xs text-slate-500 mb-4 fiche-summary">${f.summary}</p>
+                <div class="fiche-content text-sm text-slate-600 pt-4 border-t border-slate-100 leading-relaxed">
+                    ${f.content}
+                </div>
+            `;
+            grid.appendChild(card);
+        });
+
+        // -- Gestion de l'historique --
+        document.getElementById('toggleHistory').onclick = function() {
+            const target = document.getElementById('extraHistory');
+            const isHidden = target.classList.contains('hidden');
+            target.classList.toggle('hidden');
+            this.innerText = isHidden ? "Réduire l'historique" : "Voir les repères de carrière (2000 - 2013)";
+        };
+    </script>
+</body>
+</html>
